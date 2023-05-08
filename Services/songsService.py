@@ -13,7 +13,6 @@ def getSongsProps(songs):
         songsResult.append(song.Model(artist_name, track_name, id))
         if i > 1000:
             break
-    print (songsResult)
     return songsResult
 
 
