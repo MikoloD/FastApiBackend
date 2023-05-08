@@ -26,12 +26,12 @@ app.add_middleware(
 )
 
 @app.get("/")
-async def root():
+async def index():
     return songsService.getSongsForSeachBar(currentDatasetPath)
 
-@app.get("/recommenderService")
-async def root():
-    return recommenderService.Recommend(currentDatasetPath)
+@app.get("/recommenderService/{id}")
+async def getData(id: int):
+    return recommenderService.Recommend(currentDatasetPath, id)
 
 @app.post("/")
 async def root(body: int):
