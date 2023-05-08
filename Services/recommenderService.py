@@ -31,7 +31,10 @@ def Recommend(path, mySongId, k=10):
             i += 1
             track_name = songs[id]['track_name']
             artist_name = songs[id]['artist_name']
-            recommendedSongs.append(song.Model(artist_name, track_name, id.item()))
+            spotify_uri = songs[id]['track_uri']
+            addedSong = song.Model(artist_name, track_name, id.item(), spotify_uri)
+            addedSong.UriReplace()
+            recommendedSongs.append(addedSong)
         if i == 10:
             break
 
