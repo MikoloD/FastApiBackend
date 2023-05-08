@@ -3,8 +3,10 @@ import asyncio
 from hypercorn.config import Config
 from hypercorn.asyncio import serve
 from fastapi.middleware.cors import CORSMiddleware
-import recommender
-import songsData
+from Services import songsService
+from Services import recommenderService
+
+currentDatasetPath = "Data/Dataset64788K32/"
 
 app = FastAPI()
 
@@ -25,14 +27,14 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return songsData.getSongsForSeachBar()
+    return songsService.getSongsForSeachBar(currentDatasetPath)
 
-@app.get("/SearchBar")
+@app.get("/recommenderService")
 async def root():
-    return {}
+    return recommenderService.Recommend(currentDatasetPath)
 
 @app.post("/")
-async def root():
-    return recommender.Recommend()
+async def root(body: int):
+    return recommenderService.Recommend(currentDatasetPath,body)
 
 asyncio.run(serve(app, Config()))
