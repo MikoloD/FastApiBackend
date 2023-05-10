@@ -15,7 +15,7 @@ def Recommend(path, mySongId, k=10):
     # Get the embedding of the target playlist
     target_song_embedding = embeddings[mySongId]
 
-    ratings = torch.matmul(target_song_embedding, songs_emb.t())
+    ratings = torch.sigmoid(torch.matmul(target_song_embedding, songs_emb.t()))
 
     # torch TopK
     _, torch_top_k = torch.topk(ratings.cpu(), k=k + 1, dim=0)
