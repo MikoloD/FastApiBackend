@@ -1,4 +1,6 @@
 import json
+import os
+
 import torch
 
 
@@ -14,5 +16,7 @@ def getDatasetStats(path):
         stats = json.load(f)
     return stats["num_playlists"], stats["num_nodes"]
 def getEmbeddibngs(path):
-    path += 'embeddings/embeddings_epoch_20.pt'
+    path += 'embeddings/'
+    files = os.listdir(path)
+    path = os.path.join(path, files[0])
     return torch.load(path, map_location=torch.device('cpu'))

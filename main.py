@@ -6,7 +6,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from Services import songsService
 from Services import recommenderService
 
-currentDatasetPath = "Data/Dataset64788K32/"
 
 app = FastAPI()
 
@@ -25,6 +24,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+currentDatasetPath = "Data/embeddingK128_R300_B4096/"
+
 @app.get("/")
 async def index():
     return songsService.getSongsForSeachBar(currentDatasetPath)
@@ -32,9 +33,5 @@ async def index():
 @app.get("/recommenderService/{id}")
 async def getData(id: int):
     return recommenderService.Recommend(currentDatasetPath, id)
-
-@app.post("/")
-async def root(body: int):
-    return recommenderService.Recommend(currentDatasetPath,body)
 
 asyncio.run(serve(app, Config()))
