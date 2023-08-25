@@ -1,5 +1,5 @@
 import torch
-from Data import dataProvider
+from Data import DataProvider
 from Models import song
 
 

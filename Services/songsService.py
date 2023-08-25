@@ -1,5 +1,5 @@
 from Models import song
-from Data import dataProvider
+from Data import DataProvider
 
 
 def getSongsProps(songs):
